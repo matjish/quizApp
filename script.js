@@ -22,7 +22,39 @@ const questions = [
       { text: "Structure", correct: false },
       { text: "Styling", correct: true }
     ]
-  }
+  },
+  {
+    question: "Which symbol is used for comments in JavaScript?",
+    answers: [
+      { text: "//", correct: true },
+      { text: "<!-- -->", correct: false },
+      { text: "**", correct: false }
+    ]
+  },
+    {
+    question: "What keyword declares a variable in JavaScript?",
+    answers: [
+      { text: "var", correct: true },
+      { text: "int", correct: false },
+      { text: "define", correct: false }
+    ]
+  },
+  {
+    question: "What does DOM stand for?",
+    answers: [
+      { text: "Document Object Model", correct: true },
+      { text: "Data Object Method", correct: false },
+      { text: "Desktop Oriented Mode", correct: false }
+    ]
+  },
+  {
+    question: "Which method adds an element to the end of an array?",
+    answers: [
+      { text: "push()", correct: true },
+      { text: "add()", correct: false },
+      { text: "append()", correct: false }
+    ]
+  },
 ];
 
 const questionElement = document.getElementById("question");
@@ -33,6 +65,13 @@ const scoreElement = document.getElementById("score");
 
 let currentQuestionIndex = 0;
 let score = 0;
+
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 
 function showQuestion() {
   resetState();
@@ -82,6 +121,7 @@ restartButton.addEventListener("click", () => {
   currentQuestionIndex = 0;
   score = 0;
   scoreElement.textContent = "";
+  shuffleQuestions(questions);
   restartButton.style.display = "none";
   showQuestion();
 });
@@ -93,4 +133,5 @@ function showScore() {
   restartButton.style.display = "block";
 }
 
+shuffleQuestions(questions);
 showQuestion();
