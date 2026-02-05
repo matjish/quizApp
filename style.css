@@ -19,9 +19,16 @@ h1 {
   text-align: center;
 }
 
+#question-number {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
 #question {
-  font-size: 18px;
+  font-size: 17px;
   margin-bottom: 15px;
+  font-weight: 600;
 }
 
 #answers button {

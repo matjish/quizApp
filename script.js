@@ -57,6 +57,7 @@ const questions = [
   },
 ];
 
+const questionNumberElement = document.getElementById("question-number");
 const questionElement = document.getElementById("question");
 const answersElement = document.getElementById("answers");
 const nextButton = document.getElementById("next-btn");
@@ -73,9 +74,21 @@ function shuffleQuestions(array) {
   }
 }
 
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
 function showQuestion() {
   resetState();
   const currentQuestion = questions[currentQuestionIndex];
+
+  shuffleArray(currentQuestion.answers);
+
+  questionNumberElement.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+
   questionElement.textContent = currentQuestion.question;
 
   currentQuestion.answers.forEach(answer => {
@@ -128,10 +141,13 @@ restartButton.addEventListener("click", () => {
 
 function showScore() {
   resetState();
+  questionNumberElement.textContent = "";
   questionElement.textContent = "Quiz Finished!";
   scoreElement.textContent = `Your score: ${score} / ${questions.length}`;
   restartButton.style.display = "block";
 }
+
+console.log(questionNumberElement);
 
 shuffleQuestions(questions);
 showQuestion();
