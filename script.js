@@ -28,6 +28,7 @@ const questions = [
 const questionElement = document.getElementById("question");
 const answersElement = document.getElementById("answers");
 const nextButton = document.getElementById("next-btn");
+const restartButton = document.getElementById("restart-btn");
 const scoreElement = document.getElementById("score");
 
 let currentQuestionIndex = 0;
@@ -48,6 +49,7 @@ function showQuestion() {
 
 function resetState() {
   nextButton.style.display = "none";
+  restartButton.style.display = "none";
   answersElement.innerHTML = "";
 }
 
@@ -76,11 +78,19 @@ nextButton.addEventListener("click", () => {
   }
 });
 
+restartButton.addEventListener("click", () => {
+  currentQuestionIndex = 0;
+  score = 0;
+  scoreElement.textContent = "";
+  restartButton.style.display = "none";
+  showQuestion();
+});
+
 function showScore() {
   resetState();
   questionElement.textContent = "Quiz Finished!";
   scoreElement.textContent = `Your score: ${score} / ${questions.length}`;
-  nextButton.style.display = "none";
+  restartButton.style.display = "block";
 }
 
 showQuestion();
